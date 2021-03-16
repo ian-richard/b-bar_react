@@ -13,30 +13,48 @@ const app = props => {
 
   console.log(personsState);
 
-  const switchNameHandler = () => {
+  const switchNameHandler = (onName) => {
     // console.log('was clicked');
     setPersonsState({
       persons: [
-        { name: 'Jules', age: '33'},
+        { name: onName, age: '33'},
         { name: 'Tina', age: '43'},
         { name: 'Dana', age: '40'}
       ]
-    }
-
-    )
-
+    })
   }
 
-   
+  const nameChangedHandler = (event) => {
+    setPersonsState( {
+      persons: [
+        { name: event.target.value, age: '33'},
+        { name: 'Tina', age: '43'},
+        { name: 'Dana', age: '40'}
+      ]})
+  }
+
+  const style = {
+    backgroundColor: 'white',
+    font: 'inherit',
+    border: '1px solid blue',
+    padding: '8px',
+    cursor: 'pointer'
+  };
+
     return (
       <div className="App">
      <h1>Hi</h1>
-     <button onClick={switchNameHandler}>Switch</button>
-     <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
+     <button 
+     style={style}
+     onClick={()=>switchNameHandler('Liz Arden')}>Switch</button>
+     <Person 
+     name={personsState.persons[0].name} 
+     age={personsState.persons[0].age}
+     changed={nameChangedHandler}/>
      <Person 
      name={personsState.persons[1].name} 
      age={personsState.persons[1].age}
-     click={switchNameHandler}>I like racing</Person>
+     click={switchNameHandler.bind(this, 'K.Starmer')}>I like racing</Person>
      <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
      
       </div>
